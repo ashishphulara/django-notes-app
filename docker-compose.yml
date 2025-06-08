@@ -10,6 +10,9 @@ services:
     restart: always
     depends_on:
       - django_app
+    networks:
+      - notes-app-nw
+
   django_app:
     image: django_app
     build:
@@ -31,6 +34,7 @@ services:
       start_period: 30s
     networks:
       - notes-app-nw
+
   db:
     image: mysql
     container_name: "db_cont"
@@ -47,6 +51,7 @@ services:
       start_period: 60s
     networks:
       - notes-app-nw
-networks:
-   notes-app-nw:
 
+# 👇 This should be outside `services:`
+networks:
+  notes-app-nw:
